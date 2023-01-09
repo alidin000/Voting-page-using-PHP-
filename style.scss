@@ -1,0 +1,453 @@
+:root {
+	--green200: #bbf7d0;
+	--green400: #4ade80;
+	--green600: #16a34a;
+	--green700: #15803d;
+	--green800: #166534;
+	--green900: #14532d;
+
+	--red400: #f87171;
+	--red600: #dc2626;
+	--red700: #b91c1c;
+	--red800: #991b1b;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+a {
+	text-decoration: none;
+
+}
+.navigation-wrapper {
+	position: fixed;
+	width: 100%;
+	background-color: var(--green900);
+	
+}
+.navigation {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	max-width: 900px;
+	margin: auto;
+
+	.poll-nav,
+	.other-navs {
+		display: flex;
+		align-items: center;
+		width: 257px;
+	}
+
+	.other-navs {
+		// idk
+		justify-content: center;
+	}
+
+	.poll-nav a,
+	.other-navs a {
+		padding: 20px;
+	}
+	.poll-nav a:hover,
+	.other-navs a:hover {
+		background-color: var(--green600);
+	}
+	#expired-anchor:hover {
+		background-color: var(--red600);
+	}
+
+	a.current-page {
+		background-color: var(--green600);
+	}
+
+	#expired-anchor.current-page {
+		background-color: var(--red600);
+	}
+
+	#create-poll {
+		font-weight: bolder;
+		display: inline-block;
+		padding: 10px;
+		border: 3px solid var(--green600);
+		border-radius: 15px;
+	}
+
+	#create-poll:hover {
+		background-color: var(--green600);
+	}
+}
+
+// -----------------------
+
+.main-screen-wrapper {
+	margin-top: 55px;
+	background-color: var(--green700);
+	flex: 1;
+
+	#screen-name {
+		text-align: center;
+		margin: 0 auto;
+		padding: 25px;
+		width: 900px;
+		border-bottom: 3px solid white;
+	}
+}
+
+// ----------------------------------------------------------
+// ------------ active and expired poll screens -------------
+// ----------------------------------------------------------
+
+.active-polls {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.poll {
+		margin: 20px;
+		padding: 20px;
+		width: 600px;
+		border-radius: 25px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.poll-dates {
+			display: flex;
+			width: 100%;
+			justify-content: space-around;
+			padding: 25px;
+		}
+
+		.go-to-vote {
+			border-radius: 25px;
+			padding: 10px 30px;
+			cursor: pointer;
+		}
+
+		
+		.poll-id {
+			padding-bottom: 20px;
+		}
+
+		.poll-question {
+			padding-bottom: 10px;
+		}
+	}
+}
+
+.poll.active {
+	background-color: var(--green800);
+
+	.go-to-vote {
+		background-color: var(--green600);
+		border: 3px solid var(--green400);
+	}
+
+	.go-to-vote:hover {
+		background-color: var(--green400);
+	}
+}
+
+.poll.expired {
+	background-color: var(--red800);
+
+	.go-to-vote {
+		background-color: var(--red600);
+		border: 3px solid var(--red400);
+	}
+
+	.go-to-vote:hover {
+		background-color: var(--red400);
+	}
+}
+
+// --------------------------------------------
+// ------------- voting page ------------------
+// --------------------------------------------
+
+.voting-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.vote-poll {
+	margin: 20px;
+	padding: 20px;
+	width: 600px;
+	border-radius: 25px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.vote-option-wrapper {
+		margin-bottom: 20px;
+
+		.vote-option {
+			margin-bottom: 10px;
+		}
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+
+	button {
+		margin-top: 20px;
+		border-radius: 25px;
+		padding: 10px 30px;
+		margin: auto;
+		cursor: pointer;
+	}
+	
+	.vote-poll-id {
+		padding-bottom: 20px;
+	}
+
+	.vote-poll-question {
+		padding-bottom: 20px;
+	}
+	.vote-option {
+		margin: auto;
+	}
+}
+
+
+.vote-poll.active {
+	background-color: var(--green800);
+
+	button {
+		background-color: var(--green600);
+		border: 3px solid var(--green400);
+		
+	}
+
+	button:hover {
+		background-color: var(--green400);
+	}
+}
+
+.vote-poll.expired {
+	background-color: var(--red800);
+
+	button {
+		background-color: var(--red600);
+		border: 3px solid var(--red400);
+		cursor:not-allowed;
+		color: rgb(201, 201, 201);
+	}
+}
+
+// ----------------------------------------------
+// ---------------- errors box ------------------
+// ----------------------------------------------
+
+.vote-errors,
+.create-errors,
+.login-errors,
+.register-errors {
+	margin: 20px;
+	padding: 20px;
+	width: 600px;
+	border-radius: 25px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--red600);
+
+	h1 {
+		margin-bottom: 20px;
+	}
+
+	p {
+		margin-bottom: 10px;
+	}
+}
+
+.vote-success,
+.create-success,
+.login-success,
+.register-success {
+	margin: 20px;
+	padding: 20px;
+	width: 600px;
+	border-radius: 25px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--green600);
+
+	h1 {
+		margin: 20px;
+	}
+}
+
+
+// ---------------------------------------------------------
+// ---------------- create a poll page ---------------------
+// ---------------------------------------------------------
+
+.create-poll {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	form {
+		margin: 20px;
+		padding: 20px;
+		width: 600px;
+		border-radius: 25px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.new-poll-option,
+		textarea {
+			width: 500px;
+			border: 3px solid var(--green800);
+			outline: none;
+			color: var(--green700);
+			border-radius: 25px;
+			padding: 15px;
+		}
+
+		textarea::placeholder {
+			text-align: center;
+			padding-top: 15px;
+		}
+
+		textarea {
+			height: 70px;
+		}
+
+		.new-poll-option {
+			height: 30px;
+			padding: 15px;
+			margin-bottom: 5px;
+		}
+
+		.poll-type {
+			display: flex;
+			padding-top: 20px;
+			justify-content: center;
+			align-items: center;
+
+			h3 {
+				padding: 10px;
+			}
+
+			label {
+				padding :0 20px 0 5px;
+			}
+
+			span {
+				padding: 20px;
+			}
+
+			
+
+		}
+
+		.deadline-div {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+
+			h3 {
+				padding-right: 25px;
+			}
+
+			input {
+				border: 3px solid var(--green800);
+				outline: none;
+				color: var(--green700);
+				border-radius: 25px;
+				padding: 5px;
+			}
+		}
+
+		button {
+			padding: 15px 25px;
+			margin-top: 20px;
+			background-color: var(--green400);
+			border: 3px solid var(--green800);
+			border-radius: 25px;
+			font-size: 24px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: var(--green200);
+		}
+	}
+}
+
+
+// ---------------------------------------------------------
+// -------------------- log in page ------------------------
+// ---------------------------------------------------------
+
+
+.login-page,
+.register-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	form {
+		margin: 20px;
+		padding: 20px;
+		width: 600px;
+		border-radius: 25px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		button {
+			padding: 15px 25px;
+			margin-top: 20px;
+			background-color: var(--green400);
+			border: 3px solid var(--green800);
+			border-radius: 25px;
+			font-size: 24px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: var(--green200);
+		}
+
+		input {
+			width: 300px;
+			border: 3px solid var(--green800);
+			outline: none;
+			color: var(--green700);
+			border-radius: 25px;
+			padding: 15px;
+			margin: 10px;
+		}
+
+		input::placeholder {
+			text-align: center;
+		}
+	}
+}

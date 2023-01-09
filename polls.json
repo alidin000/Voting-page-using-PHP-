@@ -1,0 +1,76 @@
+{
+    "poll1": {
+        "id": "poll1",
+        "content": "Would you like FREE snacks on the university campus?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "isMultiple": "radio",
+        "dateOfCreation": "2022-12-04",
+        "deadline": "2022-12-12",
+        "answers": {
+            "Yes": 2,
+            "No": 0
+        },
+        "voters": [
+            "userid1",
+            "userid2"
+        ]
+    },
+    "2": {
+        "id": 2,
+        "content": "what is your problem",
+        "options": [
+            "I don't know",
+            "Me",
+            "someone else"
+        ],
+        "isMultiple": "multiple-choice",
+        "dateOfCreation": "2023-01-08",
+        "deadline": "2023-01-24",
+        "answers": [],
+        "voters": []
+    },
+    "3": {
+        "id": 3,
+        "content": "what is your problem",
+        "options": [
+            "asdf",
+            "fasd",
+            "asfd"
+        ],
+        "isMultiple": "radio",
+        "dateOfCreation": "2023-01-08",
+        "deadline": "2023-01-19",
+        "answers": [],
+        "voters": []
+    },
+    "4": {
+        "id": 4,
+        "content": "what is your problem",
+        "options": [
+            "asdf",
+            "fasd",
+            "asfd"
+        ],
+        "isMultiple": "radio",
+        "dateOfCreation": "2023-01-08",
+        "deadline": "2023-01-19",
+        "answers": [],
+        "voters": []
+    },
+    "63bc389ac040e": {
+        "id": "63bc389ac040e",
+        "content": "do you like the word 'like'",
+        "options": [
+            "yes",
+            "no"
+        ],
+        "isMultiple": "radio",
+        "dateOfCreation": "2023-01-09",
+        "deadline": "2023-02-01",
+        "answers": [],
+        "voters": []
+    }
+}
