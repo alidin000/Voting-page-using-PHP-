@@ -134,6 +134,11 @@
 				<!-- add to storage the new user -->
 				<?php
 					$id =uniqid();
+					$answers = [];
+					foreach($options as $optt)
+					{
+						$answers[$optt] = 0;
+					}
 					$polls[$id] = [
 						"id"=>$id,
 						"content" => $question,
@@ -141,7 +146,7 @@
 						"isMultiple" => $pollType,
 						"dateOfCreation" => date("Y-m-d"),
 						"deadline" => $deadline,
-						"answers" =>[],
+						"answers" =>$answers,
 						"voters" =>[]
 					];
 

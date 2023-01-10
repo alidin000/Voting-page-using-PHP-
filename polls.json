@@ -18,59 +18,28 @@
             "userid2"
         ]
     },
-    "2": {
-        "id": 2,
-        "content": "what is your problem",
+    "63bd36a9b8d28": {
+        "id": "63bd36a9b8d28",
+        "content": "what kind of movies do you like",
         "options": [
-            "I don't know",
-            "Me",
-            "someone else"
+            "Action",
+            "Fantasy",
+            "Drama",
+            "Horror",
+            "anime"
         ],
         "isMultiple": "multiple-choice",
-        "dateOfCreation": "2023-01-08",
-        "deadline": "2023-01-24",
-        "answers": [],
-        "voters": []
-    },
-    "3": {
-        "id": 3,
-        "content": "what is your problem",
-        "options": [
-            "asdf",
-            "fasd",
-            "asfd"
-        ],
-        "isMultiple": "radio",
-        "dateOfCreation": "2023-01-08",
-        "deadline": "2023-01-19",
-        "answers": [],
-        "voters": []
-    },
-    "4": {
-        "id": 4,
-        "content": "what is your problem",
-        "options": [
-            "asdf",
-            "fasd",
-            "asfd"
-        ],
-        "isMultiple": "radio",
-        "dateOfCreation": "2023-01-08",
-        "deadline": "2023-01-19",
-        "answers": [],
-        "voters": []
-    },
-    "63bc389ac040e": {
-        "id": "63bc389ac040e",
-        "content": "do you like the word 'like'",
-        "options": [
-            "yes",
-            "no"
-        ],
-        "isMultiple": "radio",
-        "dateOfCreation": "2023-01-09",
-        "deadline": "2023-02-01",
-        "answers": [],
-        "voters": []
+        "dateOfCreation": "2023-01-10",
+        "deadline": "2023-01-18",
+        "answers": {
+            "Action": 1,
+            "Fantasy": 0,
+            "Drama": 1,
+            "Horror": 0,
+            "anime": 0
+        },
+        "voters": [
+            "admin"
+        ]
     }
 }

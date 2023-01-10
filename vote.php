@@ -1,5 +1,11 @@
 <?php 
 	session_start();
+	
+	// fetching//
+	$polls = json_decode(file_get_contents('polls.json'), true);
+
+	$currentPollId = $_GET['poll-id']??'';
+
 	$isLoggedIn = isset($_SESSION['user-id']);
 	if($isLoggedIn)
 	{
@@ -7,23 +13,32 @@
         $stor = new Storage(new JsonIO('users.json'));
         
         $currentUser = $stor -> findById($_SESSION['user-id']);
+
+		// storing the vote //
+		if($_POST)
+		{
+			$chosenOption = $_POST['option']??'';
+			$chosenOptions = $_POST['options']??[];
+
+			if($polls[$currentPollId]['isMultiple'] == 'radio')
+			{
+				$polls[$currentPollId]['answers'][$chosenOption] += 1;
+			}else 
+			{
+				foreach($chosenOptions as $chOptions)
+				{
+					$polls[$currentPollId]['answers'][$chOptions] += 1;
+				}
+			}
+
+			$polls[$currentPollId]['voters'][] = $currentUser['username'];
+			file_put_contents('polls.json', json_encode($polls, JSON_PRETTY_PRINT));
+		}
 	}
 
-	// fetching//
-	$polls = json_decode(file_get_contents('polls.json'), true);
 	
 	
-	$currentPollId = $_GET['poll-id']??'';
 
-	// TODO authentication
-	// $is_logged_in = false;
-
-	// if(isset($_SESSION['user_id'])){
-	// 	$is_logged_in = is_logged_in($_SESSION["logged-user-id"]);
-	// 	if($is_logged_in){
-	// 		$logged_user = $users[$_SESSION["logged-user-id"]];
-	// 	}
-	// }
 
 	$disabled = (strtotime($polls[$currentPollId]['deadline'] ) < time())?'disabled':'';
 
