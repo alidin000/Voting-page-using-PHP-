@@ -1,30 +1,16 @@
 {
-    "1": {
-        "id": "userid1",
+    "63bc5a09665fb": {
+        "id": "63bc5a09665fb",
         "username": "admin",
-        "email": "email1@email.hu",
-        "password": "admin",
-        "accountType": 1
-    },
-    "2": {
-        "id": "userid2",
-        "username": "user",
-        "email": "email2@email.hu",
-        "password": "admin",
+        "email": "admin@gmail.com",
+        "password": "$2y$10$ogP0MJOkCZ6ZJ9LH1.iCZOs2luLuennMGn5zyV.W2Gt4XlMAqg7Y6",
         "accountType": 2
     },
-    "4": {
-        "id": 4,
-        "username": "asdf",
-        "email": "asdf@gmail.com",
-        "password": "2",
-        "accountType": 1
-    },
-    "63bc38827dcda": {
-        "id": "63bc38827dcda",
-        "username": "asdfasdf",
-        "email": "asdf@gmail.com",
-        "password": "1234",
+    "63bc5a99bd944": {
+        "id": "63bc5a99bd944",
+        "username": "user1",
+        "email": "user1@gmail.com",
+        "password": "$2y$10$KbbTki\/vCdI\/ODhMFDmeiuXNazSLQvKrMnlXWTcGVjKRl3\/fvSmC.",
         "accountType": 1
     }
 }

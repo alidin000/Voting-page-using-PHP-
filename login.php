@@ -1,11 +1,22 @@
 <?php 
+	session_start();
+	$isLoggedIn = isset($_SESSION['user-id']);
+	if($isLoggedIn)
+	{
+		include_once('storage.php');
+        $stor = new Storage(new JsonIO('users.json'));
+        
+        $currentUser = $stor -> findById($_SESSION['user-id']);
+	}
+
+	// fetching //
 	$users = json_decode(file_get_contents('users.json'), true);
-
-	$errors = [];
+	
 	$name = $_POST['name'] ?? '';
-	$password = $_POST['password2'] ?? '';
-
+	$password = $_POST['password'] ?? '';
+	
 	// error handling //
+	$errors = [];
 	if ($_POST){
 		if( trim($name) === '' )
             $errors['name'] = 'The name is required.';
@@ -13,9 +24,19 @@
 		if( trim($password) === '' )
             $errors['password'] = 'The password is required.';
 
-		// TODO password matching and username matching error
+		// password matching and username matching error
+		include_once('storage.php');
+        $stor = new Storage(new JsonIO('users.json'));
+        
+        $user = $stor -> findOne([ 'username' => $name]);
+        if (!$user){
+           $errors['wrongUsername'] = 'Invalid username';
+        } else if (!password_verify($password, $user['password'])){
+			$errors['wrongPassword'] = 'Invalid password';
+        }
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,8 +55,18 @@
 			</div>
 			<a id="create-poll" href="createpoll.php">+ Create poll</a>
 			<div class="other-navs">
-				<a class="current-page" href="login.php">Log in</a>
-				<a href="register.php">Register</a>
+				<?php if(!$isLoggedIn):?>
+					<a class="current-page" href="login.php">Log in</a>
+					<a href="register.php">Register</a>
+				<?php else: ?>
+					<p class="username" style="margin-right: 20px; color: orange; display: inline;">
+                        <?php if($currentUser["accountType"] == 2): ?>
+                            <span style="margin-right: 20px; color: orange;">(👨‍💻admin)</span>
+                        <?php endif ?>
+                        <?=$currentUser["username"]?>
+                    </p>
+					<a class="current-page" href="logout.php">Logout</a>
+				<?php endif;?>
 			</div>
 		</div>
 	</div>
@@ -59,7 +90,9 @@
 			<?php endif;?>
 			<?php if(isset($_POST['log']) && count($errors) < 1):?>
 				<?php
-					header('location: activepolls.php');
+					// successful login
+					$_SESSION['user-id'] = $user['id'];
+					header('location: index.php');
 					exit();
 				?>
 			<?php endif;?>

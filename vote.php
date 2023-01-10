@@ -1,7 +1,33 @@
 <?php 
+	session_start();
+	$isLoggedIn = isset($_SESSION['user-id']);
+	if($isLoggedIn)
+	{
+		include_once('storage.php');
+        $stor = new Storage(new JsonIO('users.json'));
+        
+        $currentUser = $stor -> findById($_SESSION['user-id']);
+	}
+
+	// fetching//
 	$polls = json_decode(file_get_contents('polls.json'), true);
+	
+	
 	$currentPollId = $_GET['poll-id']??'';
+
+	// TODO authentication
+	// $is_logged_in = false;
+
+	// if(isset($_SESSION['user_id'])){
+	// 	$is_logged_in = is_logged_in($_SESSION["logged-user-id"]);
+	// 	if($is_logged_in){
+	// 		$logged_user = $users[$_SESSION["logged-user-id"]];
+	// 	}
+	// }
+
 	$disabled = (strtotime($polls[$currentPollId]['deadline'] ) < time())?'disabled':'';
+
+	// error handling //
 	$errors = [];
 	if($_POST)
 	{
@@ -12,6 +38,8 @@
 			$errors['optionErrors'] = "You didn't chose any options.";
 		}
 	}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,8 +59,18 @@
 			</div>
 			<a id="create-poll" href="createpoll.php">+ Create poll</a>
 			<div class="other-navs">
-				<a href="login.php">Log in</a>
-				<a href="register.php">Register</a>
+				<?php if(!$isLoggedIn):?>
+					<a class="current-page" href="login.php">Log in</a>
+					<a href="register.php">Register</a>
+				<?php else: ?>
+					<p class="username" style="margin-right: 20px; color: orange; display: inline;">
+                        <?php if($currentUser["accountType"] == 2): ?>
+                            <span style="margin-right: 20px; color: orange;">(👨‍💻admin)</span>
+                        <?php endif ?>
+                        <?=$currentUser["username"]?>
+                    </p>
+					<a class="current-page" href="logout.php">Logout</a>
+				<?php endif;?>
 			</div>
 		</div>
 	</div>

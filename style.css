@@ -398,3 +398,12 @@ a {
 .register-page form input::placeholder {
   text-align: center;
 }/*# sourceMappingURL=style.css.map */
+
+.warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}

@@ -1,4 +1,19 @@
 <?php 
+	session_start();
+	$isLoggedIn = isset($_SESSION['user-id']);
+	$disabled = 'disabled';
+	if($isLoggedIn)
+	{
+		include_once('storage.php');
+        $stor = new Storage(new JsonIO('users.json'));
+        
+        $currentUser = $stor -> findById($_SESSION['user-id']);
+		if($currentUser['accountType'] == 2)
+		{
+			$disabled = '';
+		}
+	}
+	
 	$polls = json_decode(file_get_contents('polls.json'), true);
 
 	$errors = [];
@@ -59,8 +74,18 @@
 			</div>
 			<a class="current-page"  id="create-poll" href="createpoll.php">+ Create poll</a>
 			<div class="other-navs">
-				<a href="login.php">Log in</a>
-				<a href="register.php">Register</a>
+				<?php if(!$isLoggedIn):?>
+					<a class="current-page" href="login.php">Log in</a>
+					<a href="register.php">Register</a>
+				<?php else: ?>
+					<p class="username" style="margin-right: 20px; color: orange; display: inline;">
+                        <?php if($currentUser["accountType"] == 2): ?>
+                            <span style="margin-right: 20px; color: orange;">(👨‍💻admin)</span>
+                        <?php endif ?>
+                        <?=$currentUser["username"]?>
+                    </p>
+					<a class="current-page" href="logout.php">Logout</a>
+				<?php endif;?>
 			</div>
 		</div>
 	</div>
@@ -86,7 +111,10 @@
 				<input class="new-poll-option" type="text" placeholder="Enter new option" name="opt5"value="<?=$options[4]??''?>">
 				<input class="new-poll-option" type="text" placeholder="Enter new option" name="opt6"value="<?=$options[5]??''?>">
 				<input class="new-poll-option" type="text" placeholder="Enter new option" name="opt7"value="<?=$options[6]??''?>">
-				<button type="submit" name="create">Create</button>
+				<button <?=$disabled?> type="submit" name="create">Create</button>
+				<?php if(!$isLoggedIn || $currentUser['accountType'] == 1):?>
+					<strong class="warning">Only admin can create a poll</strong>
+				<?php endif;?>
 			</form>	
 
 			<?php if(count($errors) > 0):?>

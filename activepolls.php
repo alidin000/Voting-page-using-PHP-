@@ -1,4 +1,15 @@
 <?php 
+	session_start();
+	$isLoggedIn = isset($_SESSION['user-id']);
+	if($isLoggedIn)
+	{
+		include_once('storage.php');
+        $stor = new Storage(new JsonIO('users.json'));
+        
+        $currentUser = $stor -> findById($_SESSION['user-id']);
+	}
+
+
 	$polls = json_decode(file_get_contents('polls.json'), true);
 ?>
 <!DOCTYPE html>
@@ -19,8 +30,18 @@
 			</div>
 			<a id="create-poll" href="createpoll.php">+ Create poll</a>
 			<div class="other-navs">
-				<a href="login.php">Log in</a>
-				<a href="register.php">Register</a>
+				<?php if(!$isLoggedIn):?>
+					<a class="current-page" href="login.php">Log in</a>
+					<a href="register.php">Register</a>
+				<?php else: ?>
+					<p class="username" style="margin-right: 20px; color: orange; display: inline;">
+                        <?php if($currentUser["accountType"] == 2): ?>
+                            <span style="margin-right: 20px; color: orange;">(👨‍💻admin)</span>
+                        <?php endif ?>
+                        <?=$currentUser["username"]?>
+                    </p>
+					<a class="current-page" href="logout.php">Logout</a>
+				<?php endif;?>
 			</div>
 		</div>
 	</div>
@@ -36,7 +57,7 @@
 						<p class="poll-create-date">Created at: <?=$s['dateOfCreation']?></p>
 						<p class="poll-deadline">Deadline: <?=$s['deadline']?></p>
 					</div>
-					<form action="vote.php" method="get">
+					<form action="<?=(!$isLoggedIn)?'login.php':'vote.php';?>" method="get">
 						<input type="hidden" name="poll-id" value="<?=$key?>">
 						<button type="submit" class="go-to-vote">Go</button>
 					</form>

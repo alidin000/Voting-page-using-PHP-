@@ -1,4 +1,14 @@
 <?php 
+	session_start();
+	$isLoggedIn = isset($_SESSION['user-id']);
+	if($isLoggedIn)
+	{
+		include_once('storage.php');
+        $stor = new Storage(new JsonIO('users.json'));
+        
+        $currentUser = $stor -> findById($_SESSION['user-id']);
+	}
+
 	$users = json_decode(file_get_contents('users.json'), true);
 
 	$errors = [];
@@ -30,6 +40,15 @@
 				$errors['password'] = 'Passwords does not match';
 			}
 		}
+
+		// unavailable username
+		include_once('storage.php');
+        $stor = new Storage(new JsonIO('users.json'));
+        
+        $user = $stor -> findOne([ 'username' => $name]);
+        if ($user){
+           $errors['wrongUsername'] = 'This username is taken';
+		}
 	}
 ?>
 <!DOCTYPE html>
@@ -50,8 +69,18 @@
 			</div>
 			<a id="create-poll" href="createpoll.php">+ Create poll</a>
 			<div class="other-navs">
-				<a href="login.php">Log in</a>
-				<a class="current-page" href="register.php">Register</a>
+				<?php if(!$isLoggedIn):?>
+					<a class="current-page" href="login.php">Log in</a>
+					<a href="register.php">Register</a>
+				<?php else: ?>
+					<p class="username" style="margin-right: 20px; color: orange; display: inline;">
+                        <?php if($currentUser["accountType"] == 2): ?>
+                            <span style="margin-right: 20px; color: orange;">(👨‍💻admin)</span>
+                        <?php endif ?>
+                        <?=$currentUser["username"]?>
+                    </p>
+					<a class="current-page" href="logout.php">Logout</a>
+				<?php endif;?>
 			</div>
 		</div>
 	</div>
@@ -82,7 +111,7 @@
 					  "id"=>$id,
 					  "username" => $name,
 					  "email" => $email,
-					  "password" => $password2,
+					  "password" => password_hash($password2, PASSWORD_DEFAULT),
 					  "accountType" => 1
 					];
 
