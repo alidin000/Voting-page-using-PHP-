@@ -12,3 +12,10 @@ Polls that have already ended are at the bottom, while the ongoing polls appear 
 </ul>
 <h3>Data storage</h3>
 <p>Data is stored in <strong>json</strong> file. Authentication is done with session</p>
+
+<h3>Features</h3>
+<ul>
+  <li>Poll creation and deletion for admin</li> 
+  <li>Voting and editing your vote for users</li> 
+  <li>Deadlines</li> 
+</ul>
