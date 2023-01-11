@@ -3,6 +3,7 @@
 	include_once('storage.php');
 	$users = new Storage(new JsonIO('users.json'));
 
+	// LOGIN CHECK //
 	$isLoggedIn = isset($_SESSION['user-id']);
 	if($isLoggedIn)
 	{   

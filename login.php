@@ -1,5 +1,7 @@
 <?php 
 	session_start();
+
+	// LOGIN CHECK //
 	$isLoggedIn = isset($_SESSION['user-id']);
 	if($isLoggedIn)
 	{
@@ -43,7 +45,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>logan POLLs</title>
+	<title>Login page</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -79,7 +81,8 @@
 				<input type="password" name="password" value="" placeholder="Password">
 				<button type="submit" name="log">Log In</button>
 			</form>
-
+			
+			<!-- Errors  -->
 			<?php if(count($errors) > 0):?>
 				<div class="login-errors">
 					<h1>ERRORS OCCURED</h1>
@@ -88,9 +91,10 @@
 					<?php endforeach; ?>
 				</div>
 			<?php endif;?>
+
+			<!-- successful login -->
 			<?php if(isset($_POST['log']) && count($errors) < 1):?>
 				<?php
-					// successful login
 					$_SESSION['user-id'] = $user['id'];
 					header('location: index.php');
 					exit();

@@ -11,8 +11,8 @@
         "dateOfCreation": "2023-01-11",
         "deadline": "2023-01-12",
         "answers": {
-            "Movie": 0,
-            "Food": 1,
+            "Movie": 1,
+            "Food": 0,
             "sport": 0
         },
         "voters": [

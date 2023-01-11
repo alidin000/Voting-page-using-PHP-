@@ -1,7 +1,12 @@
 <?php 
 	session_start();
-	$isLoggedIn = isset($_SESSION['user-id']);
+
+	//for create BUTTON //
 	$disabled = 'disabled';
+
+	// checking for logged user //
+	$isLoggedIn = isset($_SESSION['user-id']);
+	
 	if($isLoggedIn)
 	{
 		include_once('storage.php');
@@ -16,14 +21,14 @@
 	
 	$polls = json_decode(file_get_contents('polls.json'), true);
 
-	$errors = [];
 	$question = $_POST['new-poll-question'] ?? '';
     $pollType = $_POST['poll-type'] ?? '';
-
+	
 	$deadline = $_POST['deadline'] ?? '';
 	$password2 = $_POST['password2'] ?? '';
 	
 	// error handling //
+	$errors = [];
 	if ($_POST){
 
 		$options = [];
@@ -62,7 +67,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>logan POLLs</title>
+	<title>Create polls</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -116,7 +121,8 @@
 					<strong class="warning">Only admin can create a poll</strong>
 				<?php endif;?>
 			</form>	
-
+			
+			<!-- Errors -->
 			<?php if(count($errors) > 0):?>
 				<div class="create-errors">
 					<h1>ERRORS OCCURED</h1>
@@ -126,6 +132,7 @@
 				</div>
 			<?php endif;?>
 			
+			<!-- Successful poll creattion  -->
 			<?php if(isset($_POST['create']) && count($errors) < 1):?>
 				<div class="create-success">
 					<h1>SUCCESS!</h1>

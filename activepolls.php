@@ -1,5 +1,7 @@
 <?php 
 	session_start();
+
+	// LOGIN CHECK //
 	$isLoggedIn = isset($_SESSION['user-id']);
 	include_once('storage.php');
 	$stor = new Storage(new JsonIO('users.json'));
@@ -49,7 +51,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>logan POLLs</title>
+	<title>Active polls</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
