@@ -17,29 +17,5 @@
             "userid1",
             "userid2"
         ]
-    },
-    "63bd36a9b8d28": {
-        "id": "63bd36a9b8d28",
-        "content": "what kind of movies do you like",
-        "options": [
-            "Action",
-            "Fantasy",
-            "Drama",
-            "Horror",
-            "anime"
-        ],
-        "isMultiple": "multiple-choice",
-        "dateOfCreation": "2023-01-10",
-        "deadline": "2023-01-18",
-        "answers": {
-            "Action": 1,
-            "Fantasy": 0,
-            "Drama": 1,
-            "Horror": 0,
-            "anime": 0
-        },
-        "voters": [
-            "admin"
-        ]
     }
 }

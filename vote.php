@@ -13,38 +13,67 @@
         $stor = new Storage(new JsonIO('users.json'));
         
         $currentUser = $stor -> findById($_SESSION['user-id']);
+		
+		// checking if user has already voted //
+		$hasAlreadyVoted = in_array($currentUser['username'],$polls[$currentPollId]['voters']);
 
 		// storing the vote //
-		if($_POST)
+		if($_POST && !$hasAlreadyVoted)
 		{
 			$chosenOption = $_POST['option']??'';
 			$chosenOptions = $_POST['options']??[];
-
 			if($polls[$currentPollId]['isMultiple'] == 'radio')
 			{
 				$polls[$currentPollId]['answers'][$chosenOption] += 1;
+				$currentUser['votes'][$currentPollId] = [
+					"id"=>$currentPollId,
+					"options" =>[$chosenOption]
+				];
 			}else 
 			{
 				foreach($chosenOptions as $chOptions)
 				{
 					$polls[$currentPollId]['answers'][$chOptions] += 1;
 				}
+				$currentUser['votes'][$currentPollId] = [
+					"id"=>$currentPollId,
+					"options" =>$chosenOptions
+				];
 			}
 
+			$stor -> update($currentUser['id'],$currentUser);
+			
 			$polls[$currentPollId]['voters'][] = $currentUser['username'];
+			
 			file_put_contents('polls.json', json_encode($polls, JSON_PRETTY_PRINT));
 		}
 	}
 
 	
-	
+	//-----> editing <-----//
+	$editMode = false;
+	if(isset($_POST['edit']))
+	{
+		$editMode = true;
+		$polls[$currentPollId]['voters']= array_diff($polls[$currentPollId]['voters'],array($currentUser['username']));
+
+		foreach($currentUser['votes'][$currentPollId]['options'] as $ans)
+		{
+			$polls[$currentPollId]['answers'][$ans]--;
+		}
+
+		unset($currentUser['votes'][$currentPollId]);
+
+		$stor -> update($currentUser['id'],$currentUser);
+		file_put_contents('polls.json', json_encode($polls, JSON_PRETTY_PRINT));
+	}
 
 
 	$disabled = (strtotime($polls[$currentPollId]['deadline'] ) < time())?'disabled':'';
 
 	// error handling //
 	$errors = [];
-	if($_POST)
+	if($_POST && !$editMode)
 	{
 		$chosenOption = $_POST['option']??'';
 		$chosenOptions = $_POST['options']??[];
@@ -105,20 +134,26 @@
 							<?php foreach($polls[$currentPollId]['options'] as $opt): ?>
 								<?php if($polls[$currentPollId]['isMultiple'] == 'radio'):?>
 									<div class="vote-option">
-										<input type="radio" name="option" value="<?=$opt?>">
+										<input <?php if($editMode && isset($currentUser['votes']['options'][$opt])){echo 'checked';}?>  type="radio" name="option" value="<?=$opt?>">
 										<span><?=$opt?></span>
 									</div>
 								<?php endif;?>
 
 								<?php if($polls[$currentPollId]['isMultiple'] !== 'radio'):?>
 									<div class="vote-option">
-										<input type="checkbox" name="options[]" value="<?=$opt?>">
+										<input <?php if($editMode && isset($currentUser['votes']['options'][$opt])){echo 'checked';}?> type="checkbox" name="options[]" value="<?=$opt?>">
 										<span><?=$opt?></span>
 									</div>
 								<?php endif;?>
 							<?php endforeach; ?>
 						</div>
-						<button type="submit" name="submit">Submit</button>
+						<?php if(!$hasAlreadyVoted || $editMode):?>
+							<button type="submit" name="submit">Submit</button>
+							<?php $editMode = false;?>
+						<?php else:?>
+							<button type="submit" name="edit">Edit</button>
+							You have already voted
+						<?php endif;?>
 					</form>
 				</div>
 			<?php endif;?>

@@ -119,6 +119,11 @@ a {
   padding: 10px 30px;
   cursor: pointer;
 }
+.active-polls .poll .delete-vote {
+  border-radius: 25px;
+  padding: 10px 30px;
+  cursor: pointer;
+}
 .active-polls .poll .poll-id {
   padding-bottom: 20px;
 }
@@ -145,6 +150,28 @@ a {
   border: 3px solid var(--red400);
 }
 .poll.expired .go-to-vote:hover {
+  background-color: var(--red400);
+}
+.poll.active .go-to-vote {
+  background-color: var(--green600);
+  border: 3px solid var(--green400);
+}
+.poll.active .go-to-vote:hover {
+  background-color: var(--green400);
+}
+
+.poll.active .delete-vote {
+  background-color: var(--red600);
+  border: 3px solid var(--red400);
+}
+.poll.active .delete-vote:hover {
+  background-color: var(--red400);
+}
+.poll.expired .delete-vote {
+  background-color: var(--red600);
+  border: 3px solid var(--red400);
+}
+.poll.expired .delete-vote:hover {
   background-color: var(--red400);
 }
 

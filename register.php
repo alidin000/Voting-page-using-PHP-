@@ -1,15 +1,14 @@
 <?php 
 	session_start();
+	include_once('storage.php');
+	$users = new Storage(new JsonIO('users.json'));
+
 	$isLoggedIn = isset($_SESSION['user-id']);
 	if($isLoggedIn)
-	{
-		include_once('storage.php');
-        $stor = new Storage(new JsonIO('users.json'));
-        
-        $currentUser = $stor -> findById($_SESSION['user-id']);
+	{   
+        $currentUser = $users -> findById($_SESSION['user-id']);
 	}
 
-	$users = json_decode(file_get_contents('users.json'), true);
 
 	$errors = [];
 	$name = $_POST['name'] ?? '';
@@ -33,7 +32,7 @@
 		if( trim($password2) === '' )
             $errors['password2'] = 'Enter the password again.';
 		
-		if(!$errors['password1'] && !$errors['password2'])
+		if(isset($errors['password1']) && isset($errors['password2']))
 		{
 			if($password1 !== $password2)
 			{
@@ -41,11 +40,8 @@
 			}
 		}
 
-		// unavailable username
-		include_once('storage.php');
-        $stor = new Storage(new JsonIO('users.json'));
-        
-        $user = $stor -> findOne([ 'username' => $name]);
+		// unavailable username        
+        $user = $users -> findOne([ 'username' => $name]);
         if ($user){
            $errors['wrongUsername'] = 'This username is taken';
 		}
@@ -57,7 +53,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>logan POLLs</title>
+	<title>Register page</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -104,20 +100,18 @@
 			<?php endif;?>
 			
 			<?php if(isset($_POST['register']) && count($errors) < 1):?>
+
 				<!-- add to storage the new user -->
 				<?php
-					$id = uniqid();
-					$users[$id] = [
+					$newUser = [
 					  "id"=>$id,
 					  "username" => $name,
 					  "email" => $email,
 					  "password" => password_hash($password2, PASSWORD_DEFAULT),
-					  "accountType" => 1
+					  "accountType" => 1,
+					  "votes" => []
 					];
-
-					file_put_contents('users.json', json_encode($users, JSON_PRETTY_PRINT));
-					header('location: login.php');
-					exit();
+					$users->add($newUser);
 				?>
 			<?php endif;?>
 			

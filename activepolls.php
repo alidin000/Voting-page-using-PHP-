@@ -1,16 +1,27 @@
 <?php 
 	session_start();
 	$isLoggedIn = isset($_SESSION['user-id']);
+	include_once('storage.php');
+	$stor = new Storage(new JsonIO('users.json'));
 	if($isLoggedIn)
 	{
-		include_once('storage.php');
-        $stor = new Storage(new JsonIO('users.json'));
-        
         $currentUser = $stor -> findById($_SESSION['user-id']);
 	}
 
 
 	$polls = json_decode(file_get_contents('polls.json'), true);
+
+	// -----> deleting <------ //
+	if(isset($_POST['delete']))
+	{
+		$pollToDeleteId = $_POST['poll-id'];
+		unset($polls[$pollToDeleteId]);
+
+		unset($currentUser['votes'][$pollToDeleteId]);
+		$stor -> update($currentUser['id'],$currentUser);
+
+		file_put_contents('polls.json', json_encode($polls, JSON_PRETTY_PRINT));
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,6 +72,12 @@
 						<input type="hidden" name="poll-id" value="<?=$key?>">
 						<button type="submit" class="go-to-vote">Go</button>
 					</form>
+					<?php if($currentUser['accountType'] == 2) :?>
+						<form action="activepolls.php" method="post">
+							<input type="hidden" name="poll-id" value="<?=$key?>">
+							<button type="submit" class="delete-vote" name="delete">Delete</button>
+						</from>
+					<?php endif;?>
 				</div>
 			<?php endif;?>
 		<?php endforeach; ?>

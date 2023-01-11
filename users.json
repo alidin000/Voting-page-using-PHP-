@@ -4,13 +4,21 @@
         "username": "admin",
         "email": "admin@gmail.com",
         "password": "$2y$10$ogP0MJOkCZ6ZJ9LH1.iCZOs2luLuennMGn5zyV.W2Gt4XlMAqg7Y6",
-        "accountType": 2
+        "accountType": 2,
+        "votes": []
     },
     "63bc5a99bd944": {
         "id": "63bc5a99bd944",
         "username": "user1",
         "email": "user1@gmail.com",
         "password": "$2y$10$KbbTki\/vCdI\/ODhMFDmeiuXNazSLQvKrMnlXWTcGVjKRl3\/fvSmC.",
+        "accountType": 1
+    },
+    "63bd459a67417": {
+        "id": "63bd459a67417",
+        "username": "nrudxe",
+        "email": "alidinabylkasymuul03@gmail.com",
+        "password": "$2y$10$qCYl9144kd7.EDf.vbagferNvYembVDorq1gXgfXVdjHQINbXZDCC",
         "accountType": 1
     }
 }
