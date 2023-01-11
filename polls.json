@@ -1,21 +1,22 @@
 {
-    "poll1": {
-        "id": "poll1",
-        "content": "Would you like FREE snacks on the university campus?",
+    "63be35d8052b7": {
+        "id": "63be35d8052b7",
+        "content": "what do you like?",
         "options": [
-            "Yes",
-            "No"
+            "Movie",
+            "Food",
+            "sport"
         ],
-        "isMultiple": "radio",
-        "dateOfCreation": "2022-12-04",
-        "deadline": "2022-12-12",
+        "isMultiple": "multiple-choice",
+        "dateOfCreation": "2023-01-11",
+        "deadline": "2023-01-12",
         "answers": {
-            "Yes": 2,
-            "No": 0
+            "Movie": 0,
+            "Food": 1,
+            "sport": 0
         },
         "voters": [
-            "userid1",
-            "userid2"
+            "admin"
         ]
     }
 }

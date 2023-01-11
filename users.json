@@ -5,7 +5,21 @@
         "email": "admin@gmail.com",
         "password": "$2y$10$ogP0MJOkCZ6ZJ9LH1.iCZOs2luLuennMGn5zyV.W2Gt4XlMAqg7Y6",
         "accountType": 2,
-        "votes": []
+        "votes": {
+            "63be26c51dcbd": {
+                "id": "63be26c51dcbd",
+                "options": [
+                    "asdfasd",
+                    "fadsf"
+                ]
+            },
+            "63be35d8052b7": {
+                "id": "63be35d8052b7",
+                "options": [
+                    "Food"
+                ]
+            }
+        }
     },
     "63bc5a99bd944": {
         "id": "63bc5a99bd944",

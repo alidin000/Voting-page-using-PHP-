@@ -53,7 +53,7 @@
 		</div>
 	</div>
 	<div class="main-screen-wrapper">
-		<h1 id="screen-name">Active Polls</h1>
+		<h1 id="screen-name">Expired Polls</h1>
 		<div class="active-polls">
 		<?php foreach($polls as $key => $s): ?>
 			<?php if(strtotime($s['deadline']) < time()):?>
@@ -68,11 +68,11 @@
 						<input type="hidden" name="poll-id" value="<?=$key?>">
 						<button type="submit" class="go-to-vote">See results</button>
 					</form>
-					<?php if($currentUser['accountType'] == 2) :?>
+					<?php if($isLoggedIn && $currentUser['accountType'] == 2) :?>
 						<form action="" method="post">
 							<input type="hidden" name="poll-id" value="<?=$key?>">
 							<button type="submit" class="delete-vote" name="delete">Delete</button>
-						</from>
+						</form>
 					<?php endif;?>
 				</div>
 			<?php endif;?>

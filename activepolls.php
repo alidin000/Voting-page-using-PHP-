@@ -22,6 +22,26 @@
 
 		file_put_contents('polls.json', json_encode($polls, JSON_PRETTY_PRINT));
 	}
+
+
+	//------->SORTING POLLS<-------- // 
+	function compare($poll1, $poll2){
+		return strcmp($poll1["deadline"], $poll2["deadline"]);
+	}
+
+	//sorting votes by deadline and putting the latest created to the top//
+	$dataForOutput = [];
+	if(count($polls) > 0)
+	{
+		$LATEST = array_pop($polls);
+
+		$dataForOutput = $polls;
+		$polls[] = $LATEST;
+		uasort($dataForOutput, "compare");
+
+		array_unshift($dataForOutput,$LATEST);
+	}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +79,7 @@
 	<div class="main-screen-wrapper">
 		<h1 id="screen-name">Active Polls</h1>
 		<div class="active-polls">
-		<?php foreach($polls as $key => $s): ?>
+		<?php foreach($dataForOutput as $key => $s): ?>
 			<?php if(strtotime($s['deadline']) >= time()):?>
 				<div class="poll active">
 					<h2 class="poll-id">@<?=$s['id']?></h2>
@@ -69,14 +89,14 @@
 						<p class="poll-deadline">Deadline: <?=$s['deadline']?></p>
 					</div>
 					<form action="<?=(!$isLoggedIn)?'login.php':'vote.php';?>" method="get">
-						<input type="hidden" name="poll-id" value="<?=$key?>">
+						<input type="hidden" name="poll-id" value="<?=$s['id']?>">
 						<button type="submit" class="go-to-vote">Go</button>
 					</form>
-					<?php if($currentUser['accountType'] == 2) :?>
+					<?php if($isLoggedIn && $currentUser['accountType'] == 2) :?>
 						<form action="activepolls.php" method="post">
-							<input type="hidden" name="poll-id" value="<?=$key?>">
+							<input type="hidden" name="poll-id" value="<?=$s['id']?>">
 							<button type="submit" class="delete-vote" name="delete">Delete</button>
-						</from>
+						</form>
 					<?php endif;?>
 				</div>
 			<?php endif;?>
