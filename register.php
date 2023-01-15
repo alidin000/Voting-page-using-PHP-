@@ -104,6 +104,7 @@
 
 				<!-- add to storage the new user -->
 				<?php
+					$id = uniqid();
 					$newUser = [
 					  "id"=>$id,
 					  "username" => $name,
