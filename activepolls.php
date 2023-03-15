@@ -70,7 +70,7 @@
 					<p class="username" style="margin-right: 20px; color: orange; display: inline;">
                         <?php if($currentUser["accountType"] == 2): ?>
                             <span style="margin-right: 20px; color: orange;">(👨‍💻admin)</span>
-                        <?php endif ?>
+                        <?php endif; ?>
                         <?=$currentUser["username"]?>
                     </p>
 					<a class="current-page" href="logout.php">Logout</a>

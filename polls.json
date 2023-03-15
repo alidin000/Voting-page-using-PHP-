@@ -18,5 +18,31 @@
         "voters": [
             "admin"
         ]
+    },
+    "6411ca3b6c4b0": {
+        "id": "6411ca3b6c4b0",
+        "content": "What is your favourite programming language?",
+        "options": [
+            "Java",
+            "Python",
+            "C#",
+            "C",
+            "C++",
+            "JavaScript"
+        ],
+        "isMultiple": "multiple-choice",
+        "dateOfCreation": "2023-03-15",
+        "deadline": "2023-03-31",
+        "answers": {
+            "Java": 0,
+            "Python": 1,
+            "C#": 1,
+            "C": 0,
+            "C++": 0,
+            "JavaScript": 0
+        },
+        "voters": [
+            "admin"
+        ]
     }
 }
