@@ -19,16 +19,16 @@ Polls that have already ended are at the bottom, while the ongoing polls appear 
   <li>Voting and editing your vote for users</li> 
   <li>Deadlines</li> 
 </ul>
- # ScreenShots
- <ul>
-     <li>Login Page</li>
-     <li><img width="250" src="/screenshots/loginPage.png" alt="Alt text" title="Optional title"></li>
-     <li>Register Page board</li>
-     <li><img width="250" src="/screenshots/registerPage.png" alt="Alt text" title="Optional title"></li>
-     <li>Voting Page</li>
-     <li><img width="400" src="/screenshots/votingPage.png" alt="Alt text" title="Optional title"></li>
-     <li>Poll creation</li>
-     <li><img width="250" src="/screenshots/pollCreationPage.png" alt="Alt text" title="Optional title"></li>
-     <li>Voting results</li>
-     <li><img width="250" src="/screenshots/VoteResults.png" alt="Alt text" title="Optional title"></li>
-  </ul>
+<h2>ScreenShots</h2>
+<ul>
+   <li>Login Page</li>
+   <li><img width="250" src="/screenshots/loginPage.png" alt="Alt text" title="Optional title"></li>
+   <li>Register Page board</li>
+   <li><img width="250" src="/screenshots/registerPage.png" alt="Alt text" title="Optional title"></li>
+   <li>Voting Page</li>
+   <li><img width="400" src="/screenshots/votingPage.png" alt="Alt text" title="Optional title"></li>
+   <li>Poll creation</li>
+   <li><img width="250" src="/screenshots/pollCreationPage.png" alt="Alt text" title="Optional title"></li>
+   <li>Voting results</li>
+   <li><img width="250" src="/screenshots/VoteResults.png" alt="Alt text" title="Optional title"></li>
+</ul>
