@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'myVotingPage'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F130F50B0E414457ADF35BE237F40E1D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8F5FDD6EBA554F2E9D3F8AA3D9D6309E }}
           package: .
