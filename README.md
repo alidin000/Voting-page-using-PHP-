@@ -1,5 +1,4 @@
 # alidin-php
-<h1> You can try it <a href="https://myvotingpage.azurewebsites.net/">here</a><h1>
 A <strong>web application</strong> where logged-in users can cast their votes on polls (questionnaires/forms). 
 Admin users can create polls for which users can vote by selecting one or more options. 
 On the main page, all polls in the system are listed. 
